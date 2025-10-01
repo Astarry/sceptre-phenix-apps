@@ -14,6 +14,6 @@ helics_broker \
   --ipv4 \
   --loglevel ${cfg['log-level']} \
   --logfile ${cfg['log-file']} \
-  --autorestart &
+  &
 
 % endfor
