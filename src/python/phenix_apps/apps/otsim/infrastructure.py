@@ -3,6 +3,8 @@ from collections import defaultdict
 
 import lxml.etree as ET
 
+from phenix_apps.common.logger import logger
+
 DEFAULT_INFRASTRUCTURES = {
     "power-distribution": {
         "node": {
@@ -270,6 +272,7 @@ class Infrastructure:
         # `devices` is a dictionary mapping infrastructure device names (used for
         # HELICS topic names and ot-sim tag names - always prepended with source
         # federate name) to its corresponding device.
+        logger.warning(f"Generating IO module XML for {infra} with devices: {devices}")
         for topic in devices.keys():
             typ = devices[topic]["type"]
             endpoint = devices[topic]["endpoint"]

@@ -4,6 +4,8 @@ from phenix_apps.apps.otsim.infrastructure import merge_infrastructure_with_defa
 from phenix_apps.apps.otsim.protocols.dnp3 import DNP3
 from phenix_apps.apps.otsim.protocols.modbus import Modbus
 
+from phenix_apps.common.logger import logger
+
 
 class Register:
     def __init__(self, typ, tag, md=None):
@@ -153,10 +155,11 @@ class FieldDeviceServer(Device):
                 devices = self.md["dnp3"]["devices"]
             else:
                 devices = self.md["dnp3"]
-
+            logger.warning(f"Processing DNP3 devices for {self.node['name']}: {devices}")
             for fd in devices:
                 assert fd["type"] in mapping
                 device = mapping[fd["type"]]
+                phases = mapping[fd["type"]].get("phases")
 
                 # device name might be prefixed with HELICS federate name
                 parts = fd["name"].split("/")
@@ -169,11 +172,15 @@ class FieldDeviceServer(Device):
                     # see if variable types were provided.
                     if isinstance(var_type, str):
                         var_type = {"type": var_type}
-
-                    reg = Register(
+                    if phases:
+                        for index in range(phases):
+                            reg = Register(var_type["type"], f"{name}_{index}.{var}", var_type.get("dnp3", {}))
+                            self.registers["dnp3"].append(reg)
+                    else:
+                        reg = Register(
                         var_type["type"], f"{name}.{var}", var_type.get("dnp3", {})
                     )
-                    self.registers["dnp3"].append(reg)
+                        self.registers["dnp3"].append(reg)
 
         if "modbus" in self.md:
             if "modbus" not in self.registers:

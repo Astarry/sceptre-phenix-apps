@@ -128,7 +128,7 @@ class OTSim(AppBase):
                 self.add_inject(hostname=device.hostname, inject=inject)
 
     def pre_start(self):
-        logger.info(f"Starting user application: {self.name}")
+        logger.info(f"Starting ASHWINI user application: {self.name}")
 
         ot_devices = {}
         mappings = self.metadata.get("infrastructures", {})
