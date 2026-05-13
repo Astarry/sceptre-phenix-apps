@@ -160,7 +160,8 @@ class FieldDeviceServer(Device):
             for fd in devices:
                 assert fd["type"] in mapping
                 device = mapping[fd["type"]]
-                phases = mapping[fd["type"]].get("phases")
+                phases = device.get("phases")
+                
                 logger.info(f"Processing DNP3 device {fd['name']} with type {fd['type']} and phases {phases} in class FieldDeviceSERVER")
 
                 # device name might be prefixed with HELICS federate name
@@ -177,13 +178,13 @@ class FieldDeviceServer(Device):
                     if phases:
                         for index in range(phases):
                             reg = Register(var_type["type"], f"{name}_{index}.{var}", var_type.get("dnp3", {}))
-                            logger.info(f"Adding register {reg} to DNP3 server in class FieldDeviceSERVER")
+                            logger.info(f"Adding register {var_type["type"]}, {name}_{index}.{var} to DNP3 server in class FieldDeviceSERVER")
                             self.registers["dnp3"].append(reg)
                     else:
                         reg = Register(
                         var_type["type"], f"{name}.{var}", var_type.get("dnp3", {})
                     )
-                        logger.info(f"Adding DEFUALT register {reg} to DNP3 server in class FieldDeviceSERVER")
+                        logger.info(f"Adding DEFAULT register {var_type["type"]}, {name}.{var} to DNP3 server in class FieldDeviceSERVER")
                         self.registers["dnp3"].append(reg)
 
         if "modbus" in self.md:
