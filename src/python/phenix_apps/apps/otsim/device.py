@@ -160,21 +160,22 @@ class FieldDeviceServer(Device):
             for fd in devices:
                 assert fd["type"] in mapping
                 device = mapping[fd["type"]]
-                phases = device.get("phases")
-                
-                logger.info(f"Processing DNP3 device {fd['name']} with type {fd['type']} and phases {phases} in class FieldDeviceSERVER")
 
                 # device name might be prefixed with HELICS federate name
                 parts = fd["name"].split("/")
                 name = parts[1] if len(parts) > 1 else parts[0]
 
                 for var, var_type in device.items():
+                    logger.info(f"Processing variable {var} of type {var_type} for device {fd['name']} in class FieldDeviceSERVER")
                     # We care about static and event variable types in the DNP3 protocol
                     # module, so if the variable type is a string convert it to a
                     # dictionary so the rest of the code can be the same when checking to
                     # see if variable types were provided.
                     if isinstance(var_type, str):
                         var_type = {"type": var_type}
+                    elif isinstance(var_type, dict):
+                        var_type = var_type["type"]
+                        phases = var_type.get("phases")
                     if phases:
                         for index in range(phases):
                             reg = Register(var_type["type"], f"{name}_{index}.{var}", var_type.get("dnp3", {}))
