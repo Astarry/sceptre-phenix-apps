@@ -155,7 +155,7 @@ class FieldDeviceServer(Device):
                 devices = self.md["dnp3"]["devices"]
             else:
                 devices = self.md["dnp3"]
-            logger.warning(f"Processing DNP3 devices for {self.node['name']}: {devices}")
+            logger.info(f"Processing DNP3 devices in class FieldDeviceSERVER {devices}")
             for fd in devices:
                 assert fd["type"] in mapping
                 device = mapping[fd["type"]]
