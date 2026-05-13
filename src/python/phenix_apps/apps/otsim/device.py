@@ -172,7 +172,7 @@ class FieldDeviceServer(Device):
                     # dictionary so the rest of the code can be the same when checking to
                     # see if variable types were provided.
 
-                    logger.info(f"var_type after adding quotes is {var_type}, type is {type(var_type)}")
+                    phases = None
                     if isinstance(var_type, str):
                         var_type = {"type": var_type}
                     elif isinstance(var_type, dict):
