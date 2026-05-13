@@ -176,8 +176,9 @@ class FieldDeviceServer(Device):
                     if isinstance(var_type, str):
                         var_type = {"type": var_type}
                     elif isinstance(var_type, dict):
-                        var_type = var_type["type"]
                         phases = var_type.get("phases")
+                        var_type = var_type["type"]
+
                     if phases:
                         for index in range(phases):
                             reg = Register(var_type["type"], f"{name}_{index}.{var}", var_type.get("dnp3", {}))
