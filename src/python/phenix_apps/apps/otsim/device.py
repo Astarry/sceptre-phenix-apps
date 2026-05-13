@@ -22,7 +22,8 @@ class Device:
             configs = {}
         self.node = node
         self.md = node.get("metadata", {})
-        self.infra = self.md.get("infrastructure", default_infra)
+        self.infra = self.md.get("infrastructures", default_infra)
+        logger.info(f"self.infra is {self.infra}")
 
         self.registers = {}
         self.processed = False
@@ -137,7 +138,7 @@ class FieldDeviceServer(Device):
     def process(self, mappings):
         if self.processed:
             return
-
+        logger.info(f"Processing FieldDeviceServer with mappings {mappings}, self.infra {self.infra}")
         # merge provided mappings (if any) with default mappings (if any)
         mapping = merge_infrastructure_with_default(
             self.infra, mappings.get(self.infra, {})
