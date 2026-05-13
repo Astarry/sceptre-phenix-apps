@@ -248,14 +248,16 @@ def merge_infrastructure_with_default(infra, mappings):
     # mappings (if any). Note that this only goes two levels deep (which is all
     # that's needed right now).
     merged = copy.deepcopy(DEFAULT_INFRASTRUCTURES.get(infra, {}))
-
-    for k, v in mappings.items():
-        if k in merged:
-            merged[k] = {**merged[k], **v}
-        else:
-            merged[k] = v
-
+    deep_merge(merged, mappings)
     return merged
+
+def deep_merge(dict1, dict2):
+    for k, v in dict2.items():
+        if isinstance(v, dict) and k in dict1 and isinstance(dict1[k], dict):
+            deep_merge(dict1[k], v)
+        else:
+            dict1[k] = v
+    return dict1
 
 
 class Infrastructure:
