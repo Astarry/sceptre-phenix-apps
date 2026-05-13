@@ -138,7 +138,7 @@ class FieldDeviceServer(Device):
     def process(self, mappings):
         if self.processed:
             return
-        logger.info(f"Processing FieldDeviceServer with mappings {mappings}, self.infra {self.infra}")
+
         # merge provided mappings (if any) with default mappings (if any)
         mapping = merge_infrastructure_with_default(
             self.infra, mappings.get(self.infra, {})
@@ -161,6 +161,7 @@ class FieldDeviceServer(Device):
                 assert fd["type"] in mapping
                 device = mapping[fd["type"]]
                 phases = mapping[fd["type"]].get("phases")
+                logger.info(f"Processing DNP3 device {fd['name']} with type {fd['type']} and phases {phases} in class FieldDeviceSERVER")
 
                 # device name might be prefixed with HELICS federate name
                 parts = fd["name"].split("/")
@@ -176,11 +177,13 @@ class FieldDeviceServer(Device):
                     if phases:
                         for index in range(phases):
                             reg = Register(var_type["type"], f"{name}_{index}.{var}", var_type.get("dnp3", {}))
+                            logger.info(f"Adding register {reg} to DNP3 server in class FieldDeviceSERVER")
                             self.registers["dnp3"].append(reg)
                     else:
                         reg = Register(
                         var_type["type"], f"{name}.{var}", var_type.get("dnp3", {})
                     )
+                        logger.info(f"Adding DEFUALT register {reg} to DNP3 server in class FieldDeviceSERVER")
                         self.registers["dnp3"].append(reg)
 
         if "modbus" in self.md:
