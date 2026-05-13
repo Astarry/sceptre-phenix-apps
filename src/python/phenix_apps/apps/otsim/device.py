@@ -1,4 +1,5 @@
 import lxml.etree as ET
+import ast
 
 from phenix_apps.apps.otsim.infrastructure import merge_infrastructure_with_default
 from phenix_apps.apps.otsim.protocols.dnp3 import DNP3
@@ -171,6 +172,8 @@ class FieldDeviceServer(Device):
                     # module, so if the variable type is a string convert it to a
                     # dictionary so the rest of the code can be the same when checking to
                     # see if variable types were provided.
+                    var_type = f'"{var_type}"'
+                    logger.info(f"var_type after adding quotes is {var_type}, type is {type(var_type)}")
                     var_type = ast.literal_eval(var_type)
                     if isinstance(var_type, str):
                         var_type = {"type": var_type}
