@@ -143,7 +143,7 @@ class FieldDeviceServer(Device):
         mapping = merge_infrastructure_with_default(
             self.infra, mappings.get(self.infra, {})
         )
-
+        logger.info(f"After merging infrastructure with default, mapping is {mapping}")
         if "dnp3" in self.md:
             if "dnp3" not in self.registers:
                 self.registers["dnp3"] = []
