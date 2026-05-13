@@ -171,6 +171,7 @@ class FieldDeviceServer(Device):
                     # module, so if the variable type is a string convert it to a
                     # dictionary so the rest of the code can be the same when checking to
                     # see if variable types were provided.
+                    var_type = ast.literal_eval(var_type)
                     if isinstance(var_type, str):
                         var_type = {"type": var_type}
                     elif isinstance(var_type, dict):
