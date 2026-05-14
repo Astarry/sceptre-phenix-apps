@@ -130,7 +130,7 @@ class Infrastructure:
 
                 if var_type in ["analog-read", "analog-read-write"]:
                     if phases:
-                        typ.text = vector
+                        typ.text = "vector"
                     else:
                         typ.text = "double"
                 else:
