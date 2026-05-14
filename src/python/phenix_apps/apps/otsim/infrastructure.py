@@ -71,10 +71,13 @@ def merge_infrastructure_with_default(infra, mappings):
     merged = copy.deepcopy(DEFAULT_INFRASTRUCTURES.get(infra, {}))
 
     for k, v in mappings.items():
+        logger.info("looking at {k}:{v} in mappings.items")
         if k in merged:
             merged[k] = {**merged[k], **v}
+            logger.info("merged[k] {k}is {merged[k]}")
         else:
             merged[k] = v
+            logger.info("ELSE merged[k] {k} is {merged[k]}")
 
     return merged
 
@@ -85,6 +88,7 @@ class Infrastructure:
 
     def io_module_xml(self, doc, infra, devices):
         # merge provided mappings (if any) with default mappings (if any)
+        logger.info(f"BEFORE MERGING infra is {infra}, mapping is {self.mappings.get(infra, {})}")
         mapping = merge_infrastructure_with_default(infra, self.mappings.get(infra, {}))
         logger.info(f"Mapping is {mapping}")
         logger.info(f"Devices is {devices}")
