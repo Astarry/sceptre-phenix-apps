@@ -20,7 +20,7 @@ class Device:
             configs = {}
         self.node = node
         self.md = node.get("metadata", {})
-        self.infra = self.md.get("infrastructure", default_infra)
+        self.infra = self.md.get("infrastructures", default_infra)
 
         self.registers = {}
         self.processed = False
