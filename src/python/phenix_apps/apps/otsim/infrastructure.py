@@ -69,17 +69,17 @@ def merge_infrastructure_with_default(infra, mappings):
     # mappings (if any). Note that this only goes two levels deep (which is all
     # that's needed right now).
     merged = copy.deepcopy(DEFAULT_INFRASTRUCTURES.get(infra, {}))
-    logger.info(f"INITAL merged is {merged}")
+    logger.info(f"In MERGE, INITAL merged is {merged}")
     for k, v in mappings.items():
-        logger.info(f"looking at {k}:{v} in mappings.items")
+        logger.info(f"In MERGE, looking at {k}:{v} in mappings.items")
         if k in merged:
             merged.pop(k) # remove the default mapping for this key so we can merge it with the provided mapping
-            merged[k] = v
+            merged[k] = **v
             #merged[k] = {**merged[k], **v}
-            logger.info(f"merged[k] {k} value: {merged[k]}")
+            logger.info(f"In MERGE merged[k] {k} value: {merged[k]}")
         else:
             merged[k] = v
-            logger.info(f"ELSE merged[k] {k} is {merged[k]}")
+            logger.info(f"In MERGE ELSE merged[k] {k} is {merged[k]}")
 
     return merged
 
@@ -90,10 +90,10 @@ class Infrastructure:
 
     def io_module_xml(self, doc, infra, devices):
         # merge provided mappings (if any) with default mappings (if any)
-        logger.info(f"BEFORE MERGING infra is {infra}, mapping is {self.mappings.get(infra, {})}")
+        logger.info(f"io_module_xml BEFORE MERGING infra is {infra}, mapping is {self.mappings.get(infra, {})}")
         mapping = merge_infrastructure_with_default(infra, self.mappings.get(infra, {}))
-        logger.info(f"Mapping is {mapping}")
-        logger.info(f"Devices is {devices}")
+        logger.info(f"io_module_xml Mapping is {mapping}")
+        logger.info(f"io_module_xml Devices is {devices}")
         # mapping of unique message endpoint names --> tag elements for IO module
         endpoints = defaultdict(list)
 
