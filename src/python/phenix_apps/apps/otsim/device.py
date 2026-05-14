@@ -137,7 +137,7 @@ class FieldDeviceServer(Device):
     def process(self, mappings):
         if self.processed:
             return
-        logger.info(f"Mapping was {mapping}, self.infra is {self.infra} in FieldDeviceServer process")
+        logger.info(f"Mapping was {mappings}, self.infra is {self.infra} in FieldDeviceServer process")
         # merge provided mappings (if any) with default mappings (if any)
         mapping = merge_infrastructure_with_default(
             self.infra, mappings.get(self.infra, {})
