@@ -169,13 +169,24 @@ class FieldDeviceServer(Device):
                     # module, so if the variable type is a string convert it to a
                     # dictionary so the rest of the code can be the same when checking to
                     # see if variable types were provided.
+                    phases = None
+                    if isinstance(var_type, dict):
+                        phases = var_type.get("phases")
+                        var_type = var_type["type"]
                     if isinstance(var_type, str):
                         var_type = {"type": var_type}
 
-                    reg = Register(
-                        var_type["type"], f"{name}.{var}", var_type.get("dnp3", {})
-                    )
-                    self.registers["dnp3"].append(reg)
+                    if phases:
+                        for index in range(phases):
+                            reg = Register(
+                                var_type["type"], f"{name}.{var}_{index}", var_type.get("dnp3", {})
+                            )
+                            self.registers["dnp3"].append(reg)
+                    else:
+                        reg = Register(
+                            var_type["type"], f"{name}.{var}", var_type.get("dnp3", {})
+                        )
+                        self.registers["dnp3"].append(reg)
 
         if "modbus" in self.md:
             if "modbus" not in self.registers:

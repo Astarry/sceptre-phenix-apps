@@ -7,58 +7,58 @@ from phenix_apps.common.logger import logger
 DEFAULT_INFRASTRUCTURES = {
     "power-distribution": {
         "node": {
-            "voltage": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
+            "voltage": {"type": "analog-read", "modbus": {"scaling": 2}},
         },
         "bus": {
-            "voltage": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
+            "voltage": {"type": "analog-read", "modbus": {"scaling": 2}},
         },
         "breaker": {
-            "voltage": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
-            "current": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
-            "freq": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
-            "power": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
-            "status": {"type": "binary-read", "phase": 1},
-            "controls": {"type": "binary-read-write", "phase": 1},
+            "voltage": {"type": "analog-read", "modbus": {"scaling": 2}},
+            "current": {"type": "analog-read", "modbus": {"scaling": 2}},
+            "freq": {"type": "analog-read", "modbus": {"scaling": 2}},
+            "power": {"type": "analog-read", "modbus": {"scaling": 2}},
+            "status": {"type": "binary-read"},
+            "controls": {"type": "binary-read-write"},
         },
         "capacitor": {
-            "voltage": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
-            "current": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
-            "freq": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
-            "power": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
-            "setpt": {"type": "analog-read-write", "modbus": {"scaling": 2}, "phase": 1},
+            "voltage": {"type": "analog-read", "modbus": {"scaling": 2}},
+            "current": {"type": "analog-read", "modbus": {"scaling": 2}},
+            "freq": {"type": "analog-read", "modbus": {"scaling": 2}},
+            "power": {"type": "analog-read", "modbus": {"scaling": 2}},
+            "setpt": {"type": "analog-read-write", "modbus": {"scaling": 2}},
         },
         "regulator": {
-            "voltage": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
-            "current": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
-            "freq": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
-            "power": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
-            "setpt": {"type": "analog-read-write", "modbus": {"scaling": 2}, "phase": 1},
+            "voltage": {"type": "analog-read", "modbus": {"scaling": 2}},
+            "current": {"type": "analog-read", "modbus": {"scaling": 2}},
+            "freq": {"type": "analog-read", "modbus": {"scaling": 2}},
+            "power": {"type": "analog-read", "modbus": {"scaling": 2}},
+            "setpt": {"type": "analog-read-write", "modbus": {"scaling": 2}},
         },
         "load": {
-            "voltage": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
-            "current": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
-            "active_power": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
-            "reactive_power": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
+            "voltage": {"type": "analog-read", "modbus": {"scaling": 2}},
+            "current": {"type": "analog-read", "modbus": {"scaling": 2}},
+            "active_power": {"type": "analog-read", "modbus": {"scaling": 2}},
+            "reactive_power": {"type": "analog-read", "modbus": {"scaling": 2}},
         },
         "line": {
-            "from_voltage": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
-            "from_current": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
-            "from_active_power": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
-            "from_reactive_power": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
-            "to_voltage": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
-            "to_current": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
-            "to_active_power": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
-            "to_reactive_power": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
+            "from_voltage": {"type": "analog-read", "modbus": {"scaling": 2}},
+            "from_current": {"type": "analog-read", "modbus": {"scaling": 2}},
+            "from_active_power": {"type": "analog-read", "modbus": {"scaling": 2}},
+            "from_reactive_power": {"type": "analog-read", "modbus": {"scaling": 2}},
+            "to_voltage": {"type": "analog-read", "modbus": {"scaling": 2}},
+            "to_current": {"type": "analog-read", "modbus": {"scaling": 2}},
+            "to_active_power": {"type": "analog-read", "modbus": {"scaling": 2}},
+            "to_reactive_power": {"type": "analog-read", "modbus": {"scaling": 2}},
         },
         "transformer": {
-            "from_voltage": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
-            "from_current": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
-            "from_active_power": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
-            "from_reactive_power": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
-            "to_voltage": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
-            "to_current": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
-            "to_active_power": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
-            "to_reactive_power": {"type": "analog-read", "modbus": {"scaling": 2}, "phase": 1},
+            "from_voltage": {"type": "analog-read", "modbus": {"scaling": 2}},
+            "from_current": {"type": "analog-read", "modbus": {"scaling": 2}},
+            "from_active_power": {"type": "analog-read", "modbus": {"scaling": 2}},
+            "from_reactive_power": {"type": "analog-read", "modbus": {"scaling": 2}},
+            "to_voltage": {"type": "analog-read", "modbus": {"scaling": 2}},
+            "to_current": {"type": "analog-read", "modbus": {"scaling": 2}},
+            "to_active_power": {"type": "analog-read", "modbus": {"scaling": 2}},
+            "to_reactive_power": {"type": "analog-read", "modbus": {"scaling": 2}},
         },
     },
 }
@@ -115,7 +115,7 @@ class Infrastructure:
                 # so the rest of the code can assume it's just a string.
                 phases = None
                 if isinstance(var_type, dict):
-                    phases = var_type.get("phase", 1)
+                    phases = var_type.get("phases")
                     var_type = var_type["type"]
 
                 sub = ET.Element("subscription")
@@ -129,7 +129,7 @@ class Infrastructure:
                 typ = ET.SubElement(sub, "type")
 
                 if var_type in ["analog-read", "analog-read-write"]:
-                    if phases and phases > 1:
+                    if phases:
                         typ.text = vector
                     else:
                         typ.text = "double"
