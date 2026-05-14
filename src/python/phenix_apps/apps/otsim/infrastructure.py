@@ -69,12 +69,14 @@ def merge_infrastructure_with_default(infra, mappings):
     # mappings (if any). Note that this only goes two levels deep (which is all
     # that's needed right now).
     merged = copy.deepcopy(DEFAULT_INFRASTRUCTURES.get(infra, {}))
-
+    logger.info(f"INITAL merged is {merged}")
     for k, v in mappings.items():
         logger.info(f"looking at {k}:{v} in mappings.items")
         if k in merged:
-            merged[k] = {**merged[k], **v}
-            logger.info(f"merged[k] {k}is {merged[k]}")
+            merged.pop(k) # remove the default mapping for this key so we can merge it with the provided mapping
+            merged[k] = v
+            #merged[k] = {**merged[k], **v}
+            logger.info(f"merged[k] {k} value: {merged[k]}")
         else:
             merged[k] = v
             logger.info(f"ELSE merged[k] {k} is {merged[k]}")
