@@ -4,6 +4,8 @@ from phenix_apps.apps.otsim.infrastructure import merge_infrastructure_with_defa
 from phenix_apps.apps.otsim.protocols.dnp3 import DNP3
 from phenix_apps.apps.otsim.protocols.modbus import Modbus
 
+from phenix_apps.common.logger import logger
+
 
 class Register:
     def __init__(self, typ, tag, md=None):
