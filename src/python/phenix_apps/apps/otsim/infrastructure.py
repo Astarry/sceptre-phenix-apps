@@ -74,7 +74,7 @@ def merge_infrastructure_with_default(infra, mappings):
         logger.info(f"In MERGE, looking at {k}:{v} in mappings.items")
         if k in merged:
             merged.pop(k) # remove the default mapping for this key so we can merge it with the provided mapping
-            merged[k] = **v
+            merged[k] = v.to_dict() if hasattr(v, "to_dict") else v
             #merged[k] = {**merged[k], **v}
             logger.info(f"In MERGE merged[k] {k} value: {merged[k]}")
         else:
